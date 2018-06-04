@@ -15,7 +15,9 @@ export default class controlText extends control {
       // mi18n custom mappings (defaults to camelCase type)
       mi18n: {
         date: 'dateField',
-        file: 'fileUpload'
+        file: 'fileUpload',
+        email: 'emailField',
+        url: 'urlField'
       }
     };
   }
@@ -40,5 +42,5 @@ export default class controlText extends control {
 }
 
 // register this control for the following types & text subtypes
-control.register(['text', 'file', 'date', 'number'], controlText);
-control.register(['text', 'password', 'email', 'color', 'tel'], controlText, 'text');
+control.register(['text', 'file', 'date', 'number', 'email', 'url'], controlText);
+control.register(['text', 'password', 'color', 'tel'], controlText, 'text');

@@ -191,6 +191,9 @@ export default class Helpers {
           let $roleInputs = $('.roles-field:checked', field)
           let roleVals = $roleInputs.map(index => $roleInputs[index].value).get()
 
+          let $multiInputs = $('[class^="fldmultiple-"]:checked', field)
+          let mutiVals = $multiInputs.map(index => $multiInputs[index].value).get()
+
           _this.setAttrVals(field, fieldData)
 
           if (fieldData.subtype) {

@@ -101,6 +101,8 @@ export const defaultI18n = {
       copyButton: '&#43;',
       copyButtonTooltip: 'Copy',
       dateField: 'Date Field',
+      emailField: 'Email',
+      urlField: 'URL',
       description: 'Help Text',
       descriptionField: 'Description',
       devMode: 'Developer Mode',
