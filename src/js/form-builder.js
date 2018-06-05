@@ -634,6 +634,8 @@ const FormBuilder = function(opts, element) {
           advField.push(selectUserAttrs(attribute, tUA))
         } else if (tUA.multioptions) {
           advField.push(multiSelectUserAttrs(attribute, tUA))
+        } else if (tUA.boolean) {
+          advField.push(booleanUserAttrs(attribute, tUA))
         } else {
           advField.push(inputUserAttrs(attribute, tUA))
         }
@@ -739,39 +741,40 @@ const FormBuilder = function(opts, element) {
     }
     availableRoles.push('</div>')
     let label = `<label for="${name}">${name}</label>`
-//    let accessLabels = {
-//      first: i18n.roles,
-//      second: i18n.limitRole,
-//      content: availableRoles.join(''),
-//    }
-//    console.log(availableRoles.join(''));
     return `<div class="form-group ${name}-wrap">${label}${availableRoles.join('')}</div>`;
-    // let optis = Object.keys(fieldData.options).map(val => {
-    //   let attrs = { value: val }
-    //   if (val === fieldData.value) {
-    //     attrs.selected = null
-    //   }
-    //   return m('option', fieldData.options[val], attrs).outerHTML
-    // })
-    // let selectAttrs = {
-    //   id: name + '-' + data.lastID,
-    //   title: fieldData.description || fieldData.label || name.toUpperCase(),
-    //   name: name,
-    //   className: `fld-${name} form-control`,
-    // }
-    // let label = `<label for="${selectAttrs.id}">${i18n[name]}</label>`
+  }
 
-    // Object.keys(fieldData)
-    //   .filter(prop => {
-    //     return !utils.inArray(prop, ['value', 'options', 'label'])
-    //   })
-    //   .forEach(function(attr) {
-    //     selectAttrs[attr] = fieldData[attr]
-    //   })
+  /**
+   * Select input for multiple choice user attributes
+   * @todo  replace with selectAttr
+   * @param  {String} name
+   * @param  {Object} fieldData
+   * @return {String}         select markup
+   */
+  function booleanUserAttrs(name, fieldData) {
+    let availableRoles = ['<div class="input-wrap">']
+    
+    
 
-    // let select = m('select', optis, selectAttrs).outerHTML
-    // let inputWrap = `<div class="input-wrap">${select}</div>`
-    // return `<div class="form-group ${name}-wrap">${label}${inputWrap}</div>`
+        let roleId = `fld-boolean-${name}-${data.lastID}`
+        let cbAttrs = {
+          type: 'checkbox',
+          name: name,
+          id: roleId,
+          className: 'fldboolean-'+name,
+        }
+        if (fieldData[name] && fieldData[name] === true) {
+          cbAttrs.checked = 'checked'
+        }
+
+        availableRoles.push(`<label for="${roleId}">`)
+        availableRoles.push(h.input(cbAttrs).outerHTML)
+        availableRoles.push('</label>')
+      
+    
+    availableRoles.push('</div>')
+    let label = `<label for="${name}">${name}</label>`
+    return `<div class="form-group ${name}-wrap">${label}${availableRoles.join('')}</div>`;
   }
 
   const boolAttribute = (name, values, labels) => {

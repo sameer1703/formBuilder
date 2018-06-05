@@ -203,6 +203,13 @@ export default class Helpers {
             }
           });
 
+          let $booleanInput = $('[class^="fldboolean-"]:checked', field)
+          $booleanInput.each((index)=>{
+            let fldclass = $booleanInput[index].className;
+            let fldname = fldclass.replace('fldboolean-','');
+            fieldData[fldname] = true;
+          });
+
           _this.setAttrVals(field, fieldData)
 
           if (fieldData.subtype) {
