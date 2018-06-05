@@ -192,7 +192,16 @@ export default class Helpers {
           let roleVals = $roleInputs.map(index => $roleInputs[index].value).get()
 
           let $multiInputs = $('[class^="fldmultiple-"]:checked', field)
-          let mutiVals = $multiInputs.map(index => $multiInputs[index].value).get()
+          $multiInputs.each((index)=>{
+            let fldclass = $multiInputs[index].className;
+            let fldname = fldclass.replace('fldmultiple-','');
+            if(fieldData[fldname]){
+              fieldData[fldname].push($multiInputs[index].value);
+            }else{
+              fieldData[fldname] = [];
+              fieldData[fldname].push($multiInputs[index].value);
+            }
+          });
 
           _this.setAttrVals(field, fieldData)
 
