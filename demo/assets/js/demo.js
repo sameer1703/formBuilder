@@ -117,6 +117,32 @@ jQuery(function($) {
           'blue form-control': 'Blue'
         },
         style: 'border: 1px solid red'
+      },
+      validations:{
+        label: 'Validation',
+        multioptions: {
+          'red form-control': 'Red',
+          'green form-control': 'Green',
+          'blue form-control': 'Blue'
+        }
+      },
+      customtext:{
+        label: 'Custom Text',
+        description: 'Minimum'
+      },
+      repeatable:{
+        label: 'Repeatable',
+        boolean: true
+      },
+      field_id:{
+        label: 'Field Id',
+        hidden: true
+      }
+    },
+    header: {
+      field_id:{
+        label: 'Field Id',
+        hidden: true
       }
     }
   };
@@ -177,6 +203,7 @@ jQuery(function($) {
   var fbPromise = formBuilder.promise;
 
   fbPromise.then(function(fb) {
+    formBuilder.actions.setData('[{"type":"header","subtype":"h1","label":"Header","field_id":"19"},{"type":"paragraph","subtype":"p","label":"Paragraph","field_id":"20"},{"type":"radio-group","label":"Radio Group","name":"radio-group-1528895378842","values":[{"label":"Option 1","value":"option-1"},{"label":"Option 2","value":"option-2"},{"label":"Option 3","value":"option-3"}],"field_id":"21"},{"type":"checkbox-group","label":"Checkbox Group","name":"checkbox-group-1528895379641","values":[{"label":"Option 1","value":"option-1","selected":true}],"field_id":"22"},{"type":"select","label":"Select","className":"form-control","name":"select-1528895380758","values":[{"label":"Option 1","value":"option-1","selected":true},{"label":"Option 2","value":"option-2"},{"label":"Option 3","value":"option-3"}],"field_id":"23"},{"type":"textarea","label":"Text Area","className":"form-control","name":"textarea-1528895382391","subtype":"textarea","field_id":"24"}]');
     var apiBtns = {
       showData: fb.actions.showData,
       clearFields: fb.actions.clearFields,

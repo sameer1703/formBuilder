@@ -617,6 +617,7 @@ const FormBuilder = function(opts, element) {
    * @return {String}              markup for custom user attributes
    */
   function processTypeUserAttrs(typeUserAttr, values) {
+    console.log(typeUserAttr, values);
     let advField = []
 
     for (let attribute in typeUserAttr) {
@@ -636,6 +637,8 @@ const FormBuilder = function(opts, element) {
           advField.push(multiSelectUserAttrs(attribute, tUA))
         } else if (tUA.boolean) {
           advField.push(booleanUserAttrs(attribute, tUA))
+        } else if (tUA.hidden) {
+          advField.push(hiddenUserAttrs(attribute, tUA))
         } else {
           advField.push(inputUserAttrs(attribute, tUA))
         }
@@ -730,7 +733,7 @@ const FormBuilder = function(opts, element) {
           id: roleId,
           className: 'fldmultiple-'+name,
         }
-        if (fieldData[name] && utils.inArray(key, fieldData[name])) {
+        if (fieldData['value'] && utils.inArray(key, fieldData['value'])) {
           cbAttrs.checked = 'checked'
         }
 
@@ -763,7 +766,7 @@ const FormBuilder = function(opts, element) {
           id: roleId,
           className: 'fldboolean-'+name,
         }
-        if (fieldData[name] && fieldData[name] === true) {
+        if (fieldData['value'] && fieldData['value'] === true) {
           cbAttrs.checked = 'checked'
         }
 
@@ -775,6 +778,28 @@ const FormBuilder = function(opts, element) {
     availableRoles.push('</div>')
     let label = `<label for="${name}">${name}</label>`
     return `<div class="form-group ${name}-wrap">${label}${availableRoles.join('')}</div>`;
+  }
+
+  /**
+   * hidden user attrs
+   * @todo  replace with selectAttr
+   * @param  {String} name
+   * @param  {Object} attrs
+   * @return {String}         select markup
+   */
+  function hiddenUserAttrs(name, attrs) {
+    let textAttrs = {
+      id: name + '-' + data.lastID,
+      title: attrs.description || attrs.label || name.toUpperCase(),
+      name: name,
+      type: 'hidden',
+      className: [`fld-${name}`],
+    }
+
+    textAttrs = Object.assign({}, attrs, textAttrs)
+    let textInput = `<input ${utils.attrString(textAttrs)}>`
+    let inputWrap = `${textInput}`
+    return `${inputWrap}`
   }
 
   const boolAttribute = (name, values, labels) => {
