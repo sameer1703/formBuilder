@@ -617,7 +617,6 @@ const FormBuilder = function(opts, element) {
    * @return {String}              markup for custom user attributes
    */
   function processTypeUserAttrs(typeUserAttr, values) {
-    console.log(typeUserAttr, values);
     let advField = []
 
     for (let attribute in typeUserAttr) {
